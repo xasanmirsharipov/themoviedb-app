@@ -2,11 +2,8 @@ import merge from 'lodash/merge';
 import Action from "../actions/entities";
 
 const initialState = {
-	all: {
-		ids: [],
-		isFetched: false,
-		meta: {}
-	},
+	news: {},
+	movies: {}
 };
 
 export default (state = initialState, action) => {
