@@ -15,7 +15,7 @@ function* LoadAll(){
 
 		const { data } = yield call(api.request.get, api.queryBuilder(`/news`));
 
-		const normalizedData = normalize(data.data, [ newsScheme ]);
+		const normalizedData = yield call(normalize, data.data, [ newsScheme ]);
 
 		yield put(entityAction.Load.success(normalizedData.entities));
 
@@ -26,7 +26,11 @@ function* LoadAll(){
 
 	} catch(e){
 
-		yield put(entityAction.Load.failure(e.response.data));
+		yield put(newsAction.Load.failure(e.response.data));
+
+	} finally {
+
+		yield put(newsAction.LoadAll.fulfill());
 
 	}
 }

@@ -1,6 +1,6 @@
-import { createRoutine, promisifyRoutine } from 'redux-saga-routines';
+import { createRoutine } from 'redux-saga-routines';
 
-const LoadAll = promisifyRoutine(createRoutine('LOAD_ALL_MOVIES'));
+const LoadAll = createRoutine('LOAD_ALL_MOVIES');
 
 export default {
 	LoadAll

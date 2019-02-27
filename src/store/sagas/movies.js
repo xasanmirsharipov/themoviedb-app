@@ -15,7 +15,7 @@ function* LoadAll(){
 
 		const { data } = yield call(api.request.get, api.queryBuilder(`/movies`));
 
-		const normalizedData = normalize(data.data, [ movieScheme ]);
+		const normalizedData = yield call(normalize, data.data, [ movieScheme ]);
 
 		yield put(entityAction.Load.success(normalizedData.entities));
 
@@ -27,6 +27,10 @@ function* LoadAll(){
 	} catch(e){
 
 		yield put(entityAction.Load.failure(e.response.data));
+
+	} finally {
+
+		yield put(moviesAction.LoadAll.fulfill());
 
 	}
 }
