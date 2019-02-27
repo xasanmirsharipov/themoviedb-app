@@ -3,30 +3,31 @@
 ### Main
 - [x] Folder Structure
 - [x] Gitlab CI
-- [ ] React Create App
-- [ ] HotReload
+- [x] Create React App
+- [x] HotReload
 - [ ] Typescript
-- [ ] Router
-- [ ] Multilang
+- [x] Router
+- [x] Multilang
 - [ ] Form
+- [ ] Auth
 
 
 ### Services
-- [ ] Api
+- [x] Api
 - [ ] Storage
 - [ ] Time
 
 
 ### Redux
-- [ ] Saga
-- [ ] Reselect
-- [ ] Normalizr
-- [ ] Actions 
-- [ ] Constants 
-- [ ] Reducers 
-- [ ] Sagas 
-- [ ] Schemas 
-- [ ] Selectors 
+- [x] Saga
+- [x] Reselect
+- [x] Normalizr
+
+- [x] Actions 
+- [x] Reducers 
+- [x] Sagas 
+- [x] Schemas 
+- [x] Selectors 
 
 
 ### Components
