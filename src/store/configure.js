@@ -6,15 +6,23 @@ import rootSaga from "./sagas";
 
 import middlewares, { sagaMiddleware } from './middlewares';
 
-const composeEnhancer = composeWithDevTools || compose;
-
 export default (initialState = {}) => {
 
-    const store = createStore(
-        rootReducer,
-        initialState,
-        composeEnhancer(applyMiddleware(...middlewares))
-    );
+    let store;
+
+    if(process.env.NODE_ENV === 'production'){
+
+        store = createStore(
+            rootReducer,
+            initialState,
+            compose(applyMiddleware(...middlewares))
+        );
+
+    } else {
+
+        store = console.tron.createStore(rootReducer, composeWithDevTools(applyMiddleware(...middlewares)));
+
+    }
 
     sagaMiddleware.run(rootSaga);
 

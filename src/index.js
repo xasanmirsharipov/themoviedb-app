@@ -1,3 +1,5 @@
+import './services/reactron/config';
+
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/ie11';
 
