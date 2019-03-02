@@ -10,6 +10,7 @@
 - [x] Multilang
 - [ ] Form
 - [ ] Auth
+- [x] Reactotron
 
 
 ### Services
