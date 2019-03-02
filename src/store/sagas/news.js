@@ -13,7 +13,25 @@ function* LoadAll(){
 
 		yield put(newsAction.LoadAll.request());
 
-		const { data } = yield call(api.request.get, api.queryBuilder(`/news`));
+		const query = {
+			fields: [
+				'first',
+				'second'
+			],
+			include: [
+				'first',
+				'second'
+			],
+			limit: 1,
+			sort: '-id',
+			filter: {
+				top: 1,
+				level: 0
+			},
+			page: 10
+		};
+
+		const { data } = yield call(api.request.get, api.queryBuilder('/department', query));
 
 		const normalizedData = yield call(normalize, data.data, [ newsScheme ]);
 
@@ -26,7 +44,7 @@ function* LoadAll(){
 
 	} catch(e){
 
-		yield put(newsAction.Load.failure(e.response.data));
+		yield put(newsAction.LoadAll.failure(e.data));
 
 	} finally {
 
