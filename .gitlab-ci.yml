@@ -13,7 +13,7 @@ dev:
   stage: deploy
   script:
     - npm install
-    - npm run build
+    - npm run build-develop
     - apk add --no-cache rsync sshpass openssh curl
     - mkdir -p ~/.ssh && chmod 777 ~/.ssh
     - sshpass -p $SSH_PASS_DEV rsync -riz --links -e "ssh -o StrictHostKeyChecking=no" $SSH_DIRECTORY_LOCAL_DEV $SSH_USER_DEV@$SSH_HOST_DEV:$SSH_DIRECTORY_REMOTE_DEV
@@ -22,15 +22,12 @@ dev:
     - develop
   environment:
     name: Development
-  artifacts:
-    paths:
-      - node_modules
 
 prod:
   stage: deploy
   script:
     - npm install
-    - npm run build
+    - npm run build-master
     - apk add --no-cache rsync sshpass openssh curl
     - mkdir -p ~/.ssh && chmod 777 ~/.ssh
     - sshpass -p $SSH_PASS_PROD rsync -riz --links -e "ssh -o StrictHostKeyChecking=no" $SSH_DIRECTORY_LOCAL_PROD $SSH_USER_PROD@$SSH_HOST_PROD:$SSH_DIRECTORY_REMOTE_PROD
@@ -39,12 +36,9 @@ prod:
     - master
   environment:
     name: Production
-  artifacts:
-    paths:
-      - node_modules
 
 notify_error:
   stage: notify
   script:
     - sh .ci-error-notify.sh ❌
-  when: on_failure
+  when: on_failure #deploy fail
