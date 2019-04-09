@@ -1,7 +1,10 @@
-import newsAction from './news';
-import movieAction from './movies';
+import requireContext from 'require-context.macro';
+import { importAll } from "store/utils";
 
-export {
-	newsAction,
-	movieAction
-}
+const moduleActions = importAll(requireContext('../../modules', true, /\actions.js$/), 'actions.js');
+const actions = importAll(requireContext('', false, /\w+$/), '.js');
+
+export default {
+	...moduleActions,
+	...actions
+};

@@ -1,47 +1,50 @@
-image: docker:latest
+image: node:alpine
 
-services:
-  - docker:dind
+cache:
+  key: node_modules
+  paths:
+    - node_modules/
 
-before_script:
-  - apk add --no-cache python py2-pip git rsync sshpass openssh
-  - pip install --no-cache-dir docker-compose==1.21.1
-  - mkdir -p ~/.ssh && chmod 777 ~/.ssh
-  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-  - docker info
-  - docker-compose -v
-  - docker-compose -f docker-compose.gitlab.yml up -d
-  - docker-compose ps
-  - docker-compose run node npm -v
-  - docker-compose run node npm install
-  - docker-compose run node npm run build
 stages:
-  - tests
   - deploy
-
-tests:
-  stage: tests
-  script:
-    - docker-compose run node npm -v
-  cache:
-    untracked: true
+  - notify
 
 dev:
-    stage: deploy
-    script:
-        - sshpass -p $SSH_PASS_DEV rsync -riz --links -e "ssh -o StrictHostKeyChecking=no" $SSH_DIRECTORY_LOCAL_DEV $SSH_USER_DEV@$SSH_HOST_DEV:$SSH_DIRECTORY_REMOTE_DEV
-    only:
-        - devlop
-    cache:
-      untracked: true
-      policy: pull
+  stage: deploy
+  script:
+    - npm install
+    - npm run build
+    - apk add --no-cache rsync sshpass openssh curl
+    - mkdir -p ~/.ssh && chmod 777 ~/.ssh
+    - sshpass -p $SSH_PASS_DEV rsync -riz --links -e "ssh -o StrictHostKeyChecking=no" $SSH_DIRECTORY_LOCAL_DEV $SSH_USER_DEV@$SSH_HOST_DEV:$SSH_DIRECTORY_REMOTE_DEV
+    - sh .ci-notify.sh ✅
+  only:
+    - develop
+  environment:
+    name: Development
+  artifacts:
+    paths:
+      - node_modules
 
 prod:
-    stage: deploy
-    script:
-        - sshpass -p $SSH_PASS_PROD rsync -riz --links -e "ssh -o StrictHostKeyChecking=no" $SSH_DIRECTORY_LOCAL_PROD $SSH_USER_PROD@$SSH_HOST_PROD:$SSH_DIRECTORY_REMOTE_PROD
-    only:
-        - master
-    cache:
-      untracked: true
-      policy: pull
+  stage: deploy
+  script:
+    - npm install
+    - npm run build
+    - apk add --no-cache rsync sshpass openssh curl
+    - mkdir -p ~/.ssh && chmod 777 ~/.ssh
+    - sshpass -p $SSH_PASS_PROD rsync -riz --links -e "ssh -o StrictHostKeyChecking=no" $SSH_DIRECTORY_LOCAL_PROD $SSH_USER_PROD@$SSH_HOST_PROD:$SSH_DIRECTORY_REMOTE_PROD
+    - sh .ci-notify.sh ✅
+  only:
+    - master
+  environment:
+    name: Production
+  artifacts:
+    paths:
+      - node_modules
+
+notify_error:
+  stage: notify
+  script:
+    - sh .ci-error-notify.sh ❌
+  when: on_failure

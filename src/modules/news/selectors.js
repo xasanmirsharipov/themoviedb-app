@@ -1,6 +1,9 @@
 import { createSelector } from "reselect";
 import { denormalize } from "normalizr";
-import newsScheme from "../schemas/news";
+import get from "lodash/get";
+
+import newsScheme from "./schema";
+
 
 const getEntities = state => state.entities;
 
@@ -9,9 +12,10 @@ const getAll = createSelector(
 	state => state.news.all.ids,
 	(entities, ids) => {
 		const normalized = denormalize({ news: ids }, { news: [ newsScheme ] }, entities);
-		return normalized.news;
+		return get(normalized, 'news', []);
 	}
 );
+
 
 export default {
 	getAll

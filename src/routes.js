@@ -1,23 +1,28 @@
-import React from 'react';
-import { Route, Switch } from "react-router";
+import React, { lazy, Suspense } from 'react';
+import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
 import { history } from 'store';
+import PropTypes from 'prop-types';
 
 import App from "./App";
 
-import Home from "./pages/Home";
-import News from "./pages/News";
+Route.propTypes.component = PropTypes.oneOfType([
+	Route.propTypes.component,
+	PropTypes.object,
+]);
+
+const Home = lazy(() => import("./pages/Home"));
+const News = lazy(() => import("./pages/News"));
 
 const routes = [
 	{ path: '/', exact: true, component: Home },
 	{ path: '/news', exact: true, component: News },
 ];
 
-export default ({ store }) => {
-
-	return (
-		<ConnectedRouter history={history} store={store}>
-			<App>
+export default ({ store }) => (
+	<ConnectedRouter history={history} store={store}>
+		<App>
+			<Suspense fallback="">
 				<Switch>
 					{routes.map((route, key) => (
 						<Route
@@ -28,7 +33,7 @@ export default ({ store }) => {
 						/>
 					))}
 				</Switch>
-			</App>
-		</ConnectedRouter>
-	);
-};
+			</Suspense>
+		</App>
+	</ConnectedRouter>
+);

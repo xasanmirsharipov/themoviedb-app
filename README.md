@@ -11,6 +11,8 @@
 - [ ] Form
 - [ ] Auth
 - [x] Reactotron
+- [x] Sentry error tracker
+- [x] Duck structure (modules)
 
 
 ### Services

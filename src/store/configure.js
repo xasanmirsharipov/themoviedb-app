@@ -6,6 +6,7 @@ import rootSaga from "./sagas";
 
 import middlewares, { sagaMiddleware } from './middlewares';
 
+
 export default (initialState = {}) => {
 
     let store;

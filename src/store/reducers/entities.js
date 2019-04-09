@@ -1,16 +1,18 @@
 import merge from 'lodash/merge';
-import Action from "../actions/entities";
+import Actions from "store/actions";
+
 
 const initialState = {
 	news: {},
 	movies: {}
 };
 
+
 export default (state = initialState, action) => {
 
 	switch (action.type){
 
-		case Action.Load.SUCCESS:
+		case Actions.entities.Load.SUCCESS:
 			return merge({}, state, action.payload);
 
 		default:

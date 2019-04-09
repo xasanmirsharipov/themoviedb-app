@@ -1,3 +1,5 @@
-export default {
-	API_ROOT: 'http://api.something.uz/v1',
+const { REACT_APP_API_ROOT } = process.env;
+
+const config = {
+	API_ROOT: REACT_APP_API_ROOT,
 };

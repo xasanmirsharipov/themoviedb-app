@@ -1,13 +1,17 @@
+import requireContext from 'require-context.macro';
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import { importAll } from "store/utils";
 
-import entities from './entities';
-import movies from './movies';
-import news from './news';
+const moduleReducers = importAll(requireContext('modules', true, /\/reducers.js$/), 'reducers.js');
+const reducers = importAll(requireContext('.', true, /^\.\/(?!index)\w+$/), '.js');
 
-export default combineReducers({
+const rootReducer = combineReducers({
 	router: routerReducer,
-	entities,
-	movies,
-	news,
+	...moduleReducers,
+	...reducers
 });
+
+export default (state, action) => (
+	action.type === 'RESET/TRIGGER' ? rootReducer(undefined, action) : rootReducer(state, action)
+)

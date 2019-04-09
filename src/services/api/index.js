@@ -1,18 +1,30 @@
 import axios from 'axios';
+import * as Sentry from '@sentry/browser';
 
 import config from 'config';
 import { query } from 'js-query-builder';
 
-axios.defaults.params = {};
-axios.defaults.params['_f'] = 'json';
-axios.defaults.headers.common['Accept'] = 'application/json';
-axios.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+const request = axios.create({
+	baseURL: config.API_ROOT
+});
 
-const queryBuilder = (url, { fields = [], include = [], limit = 0, sort = '', filter = '', page = 1 }) => {
+request.defaults.params = {};
+request.defaults.params['_f'] = 'json';
+request.defaults.headers.common['Accept'] = 'application/json';
+request.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+request.defaults.headers.common['Authorization'] = 'Bearer -6YqbOescHiFwx45u79AXwBKpV65tkmxqICUnbrSMyc3Ei7x_v_DblDMqgExZNpB';
+
+request.interceptors.response.use(
+	(response) => response,
+	(error) => {
+		Sentry.captureException(error);
+		return Promise.reject(error);
+	}
+);
+
+const queryBuilder = (url, { fields = [], include = [], limit = 0, sort = '', filter = '', page = 1 } = {}) => {
 
 	let queryObj = query(url);
-
-	console.log(queryObj);
 
 	if(fields.length){
 		queryObj.param('fields', fields);
@@ -30,20 +42,16 @@ const queryBuilder = (url, { fields = [], include = [], limit = 0, sort = '', fi
 		queryObj.sort(sort);
 	}
 
-	if(filter){
+	if(filter.length){
 		queryObj.filter(filter);
 	}
 
-	if(page){
+	if(page > 1){
 		queryObj.page(Number(page));
 	}
 
 	return decodeURIComponent(queryObj.build());
 };
-
-const request = axios.create({
-	baseURL: config.API_ROOT
-});
 
 export default {
 	request,
