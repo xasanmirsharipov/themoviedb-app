@@ -10,9 +10,9 @@ const request = axios.create({
 
 request.defaults.params = {};
 request.defaults.params['_f'] = 'json';
+request.defaults.params['api_key'] = config.API_KEY;
 request.defaults.headers.common['Accept'] = 'application/json';
 request.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
-request.defaults.headers.common['Authorization'] = 'Bearer -6YqbOescHiFwx45u79AXwBKpV65tkmxqICUnbrSMyc3Ei7x_v_DblDMqgExZNpB';
 
 request.interceptors.response.use(
 	(response) => response,
