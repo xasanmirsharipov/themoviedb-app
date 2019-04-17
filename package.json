@@ -37,9 +37,7 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development react-scripts start",
-    "build": "cross-env NODE_ENV=production react-scripts build && npm run",
-    "build-develop": "cp ./.env.develop .env && cross-env NODE_ENV=production CI=false react-scripts build",
-    "build-master": "cp ./.env.master .env && cross-env NODE_ENV=production CI=false react-scripts build",
+    "build": "cross-env NODE_ENV=production react-scripts build",
     "test": "react-scripts test --env=jsdom"
   },
   "eslintConfig": {
