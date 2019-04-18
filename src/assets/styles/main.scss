@@ -46,7 +46,9 @@ body{
   font-weight: 300;
   font-family: Dosis;
 }
-
+a{
+  text-decoration: none;
+}
 a, button, input, select {outline: none;}
 
 
@@ -63,16 +65,58 @@ a, button, input, select {outline: none;}
     display: flex;
     align-items: flex-start;
     .movie-info{
-      width: 66.66%;
+      width: calc(100% - 300px);
+      .title-wrapper{
+        .title{
+          color: #ffffff;
+          font-size: 60px;
+          font-weight: 700;
+          line-height: 60px;
+          text-transform: uppercase;
+          margin: 10px 0;
+        }
+        .subtitle{
+          color: #abb7c4;
+          font-size: 24px;
+          line-height: 28px;
+          max-width: 500px;
+        }
+      }
     }
     .movie-img{
-      width: 33.333%;
       padding-left: 30px;
+      width: 300px;
       img{
-        width: 270px;
+        width: 100%;
         height: auto;
       }
     }
+  }
+}
+.movie-statistics{
+  color: #abb7c4;
+  padding-left: 0;
+  li{
+    font-size: 15px;
+    margin: 5px 0;
+    list-style: none;
+    font-weight: 600;
+    span{
+      margin-right: 10px;
+      font-weight: 300;
+    }
+  }
+}
+.tags{
+  display: flex;
+  flex-wrap: wrap;
+  .item{
+    color: #ffffff;
+    margin: 0 3px;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 12px;
   }
 }
 
