@@ -7,3 +7,9 @@ export {
 	i18n,
 	genres
 };
+
+export default {
+	api,
+	i18n,
+	genres
+};

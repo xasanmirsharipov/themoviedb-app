@@ -9,21 +9,22 @@ import Selectors from "store/selectors";
 class Popular extends Component {
 
     componentDidMount(){
-        const { name, options, meta } = this.props;
-        this.Load(name, options, meta);
+        const { name, url, options, meta } = this.props;
+        this.Load(name, url, options, meta);
     }
 
     componentDidUpdate(prevProps){
-        const { name, options, meta } = this.props;
+        const { name, url, options, meta } = this.props;
         if(!isEqual(options, prevProps.options) || !isEqual(meta, prevProps.meta)){
-            this.Load(name, options, meta);
+            this.Load(name, url, options, meta);
         }
     }
 
-    Load = (name, options, { page = 1, limit = 3, sort = "-id", fields = [], include = [], filter = [] } = {}) => {
-        const { LoadNowPlaying } = this.props;
-        LoadNowPlaying({
+    Load = (name, url, options, { page = 1, limit = 3, sort = "-id", fields = [], include = [], filter = [] } = {}) => {
+        const { LoadAll } = this.props;
+        LoadAll({
             name,
+            url,
             options,
             meta: { page, limit, sort, fields, include, filter },
             cb: {
@@ -43,11 +44,11 @@ class Popular extends Component {
 
 const mapStateToProps = () => {
 
-    const getNowPlaying = Selectors.movie.getNowPlaying();
+    const getAll = Selectors.movie.getAll();
 
     return (state, props) => {
 
-        const { items, isFetched, meta } = getNowPlaying(state, props);
+        const { items, isFetched, meta } = getAll(state, props);
 
         return ({ items, isFetched, meta })
     }
@@ -55,7 +56,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
     {
-        LoadNowPlaying: Actions.movie.LoadNowPlaying.request
+        LoadAll: Actions.movie.LoadAll.request
     },
     dispatch
 );

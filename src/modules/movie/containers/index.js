@@ -1,9 +1,7 @@
 import One from './One';
-import Popular from './Popular';
-import NowPlaying from './NowPlaying';
+import All from './All';
 
 export default {
 	One,
-	Popular,
-    NowPlaying
+	All
 }

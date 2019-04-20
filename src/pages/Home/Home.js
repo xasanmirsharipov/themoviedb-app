@@ -67,13 +67,13 @@ class Home extends Component {
 				<div className="slider_v1 popular-slider">
 					<div className="container">
 
-						<MovieContainer.Popular name="PopularMovies" meta={{ page: 1 }}>
+						<MovieContainer.All name="PopularMovies" meta={{ page: 1 }} url={`/trending/all/day`}>
                             {({items, isFetched}) => (
                                 <Fragment>
 									{isFetched && (
 										<div>
 											<Swiper {...params}>
-												{items.slice(0, 5).map(item => (
+												{items.slice(0, 10).map(item => (
 													<div className="slider-item" key={item.id}>
 														<div className="movie-info">
 															<div className="tags mb-10">
@@ -103,7 +103,7 @@ class Home extends Component {
 									)}
                                 </Fragment>
                             )}
-                        </MovieContainer.Popular>
+                        </MovieContainer.All>
 
 					</div>
                 </div>
@@ -125,7 +125,7 @@ class Home extends Component {
 							))}
                         </ul>
 
-						<MovieContainer.NowPlaying name="NowPlaying" meta={{ page: 1 }} options={{slug: this.state.activeTabLink.slug}}>
+						<MovieContainer.All name="NowPlaying" url={`/movie/${this.state.activeTabLink.slug}`} meta={{ page: 1 }} options={{slug: this.state.activeTabLink.slug}}>
 							{({items, isFetched}) => (
 								<Fragment>
 									{isFetched ? (
@@ -137,7 +137,7 @@ class Home extends Component {
 														<div className="movie-title">{movie.original_title}</div>
 														<div className="vote-average">{movie.vote_average}</div>
 													</div>
-													<div className="read-more"><span>watch</span></div>
+													<Link to={`/movie/${movie.original_title}`} className="read-more"><span>watch</span></Link>
 												</div>
 											))}
 										</div>
@@ -152,7 +152,7 @@ class Home extends Component {
 									)}
 								</Fragment>
 							)}
-						</MovieContainer.NowPlaying>
+						</MovieContainer.All>
 
 					</div>
                 </div>
