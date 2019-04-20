@@ -5,45 +5,13 @@ import api from "./api";
 import Actions from "store/actions";
 import Schemas from "store/schemas";
 
-export function* LoadAll(action){
-
-	const { name, meta, cb } = action.payload;
-
-	try {
-
-		const { data } = yield call(api.getAll, data, meta);
-
-		const normalized = normalize(data.data, [ Schemas.movie ]);
-
-		yield put(Actions.entities.Load.success(normalized.entities));
-
-		yield put(Actions.movie.LoadAll.success({
-			name,
-			ids: normalized.result,
-			meta: data._meta
-		}));
-
-		yield call(cb.success);
-
-	} catch(error){
-
-		yield put(Actions.movie.LoadAll.failure({
-			name,
-			error
-		}));
-
-		yield call(cb.error);
-
-	}
-}
-
 export function* LoadPopular(action){
 
     const { name, meta, cb } = action.payload;
 
     try {
 
-        const { data } = yield call(api.getPopular, data, meta);
+        const { data } = yield call(api.getPopular, {}, meta);
 
         const normalized = normalize(data.results, [ Schemas.movie ]);
 
@@ -71,11 +39,11 @@ export function* LoadPopular(action){
 
 export function* LoadNowPlaying(action){
 
-    const { name, meta, cb } = action.payload;
-
+    const { options, name, meta, cb } = action.payload;
+    console.log(options);
     try {
 
-        const { data } = yield call(api.getNowPlaying, data, meta);
+        const { data } = yield call(api.getNowPlaying, options, meta);
 
         const normalized = normalize(data.results, [ Schemas.movie ]);
 
@@ -91,7 +59,7 @@ export function* LoadNowPlaying(action){
 
     } catch(error){
 
-        yield put(Actions.movie.LoadAll.failure({
+        yield put(Actions.movie.LoadNowPlaying.failure({
             name,
             error
         }));
@@ -103,7 +71,6 @@ export function* LoadNowPlaying(action){
 
 export default function* root() {
 	yield all([
-		takeEvery(Actions.movie.LoadAll.REQUEST, LoadAll),
 		takeLatest(Actions.movie.LoadPopular.REQUEST, LoadPopular),
 		takeLatest(Actions.movie.LoadNowPlaying.REQUEST, LoadNowPlaying),
 	]);

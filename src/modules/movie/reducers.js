@@ -12,9 +12,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type){
-		case Actions.LoadNowPlaying.REQUEST:
+
 		case Actions.LoadPopular.REQUEST:
-		case Actions.LoadAll.REQUEST:{
+        case Actions.LoadNowPlaying.REQUEST:{
 			const { name } = action.payload;
 			return {
 				...state,
@@ -24,16 +24,14 @@ export default (state = initialState, action) => {
 				}
 			};
 		}
-        case Actions.LoadNowPlaying.SUCCESS:
         case Actions.LoadPopular.SUCCESS:
-		case Actions.LoadAll.SUCCESS:{
+        case Actions.LoadNowPlaying.SUCCESS:{
 			const { name, ids, meta } = action.payload;
 			return {
 				...state,
 				[name]: {
 					...get(state, name, []),
 					ids: uniq([
-						...get(state[name], "ids", []),
 						...ids
 					]),
 					meta,
@@ -41,9 +39,8 @@ export default (state = initialState, action) => {
 				}
 			};
 		}
-        case Actions.LoadNowPlaying.FAILURE:
         case Actions.LoadPopular.FAILURE:
-		case Actions.LoadAll.FAILURE:{
+        case Actions.LoadNowPlaying.FAILURE:{
 			const { name, error } = action.payload;
 			return {
 				...state,

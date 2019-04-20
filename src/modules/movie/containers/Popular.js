@@ -20,7 +20,7 @@ class Popular extends Component {
         }
     }
 
-    Load = (name, {}, { page = 1, limit = 3, sort = "-id", fields = [], include = [], filter = [] } = {}) => {
+    Load = (name, data, { page = 1, limit = 3, sort = "-id", fields = [], include = [], filter = [] } = {}) => {
         const { LoadPopular } = this.props;
         LoadPopular({
             name,

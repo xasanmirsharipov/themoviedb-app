@@ -9,22 +9,22 @@ import Selectors from "store/selectors";
 class Popular extends Component {
 
     componentDidMount(){
-        const { name, data, meta } = this.props;
-        this.Load(name, data, meta);
+        const { name, options, meta } = this.props;
+        this.Load(name, options, meta);
     }
 
     componentDidUpdate(prevProps){
-        const { name, data, meta } = this.props;
-        if(!isEqual(data, prevProps.data) || !isEqual(meta, prevProps.meta)){
-            this.Load(name, data, meta);
+        const { name, options, meta } = this.props;
+        if(!isEqual(options, prevProps.options) || !isEqual(meta, prevProps.meta)){
+            this.Load(name, options, meta);
         }
     }
 
-    Load = (name, {}, { page = 1, limit = 3, sort = "-id", fields = [], include = [], filter = [] } = {}) => {
+    Load = (name, options, { page = 1, limit = 3, sort = "-id", fields = [], include = [], filter = [] } = {}) => {
         const { LoadNowPlaying } = this.props;
         LoadNowPlaying({
             name,
-            data: { },
+            options,
             meta: { page, limit, sort, fields, include, filter },
             cb: {
                 success: () => {},

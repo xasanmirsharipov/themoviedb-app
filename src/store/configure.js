@@ -21,7 +21,7 @@ export default (initialState = {}) => {
 
     } else {
 
-        store = console.tron.createStore(rootReducer, composeWithDevTools(applyMiddleware(...middlewares)));
+        store = createStore(rootReducer, composeWithDevTools(applyMiddleware(...middlewares)));
 
     }
 

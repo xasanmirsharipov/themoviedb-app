@@ -6,24 +6,6 @@ import Schemas from "store/schemas";
 
 const getEntities = state => state.entities;
 
-const getAll = () => (
-	createSelector(
-		getEntities,
-		(state, props) => get(state.movie, props.name, []),
-		(entities, data) => {
-
-			const { ids, isFetched, meta } = data;
-			const normalized = denormalize({ movie: ids }, { movie: [ Schemas.movie ] }, entities);
-
-			return {
-				items: get(normalized, 'movie', []),
-				isFetched,
-				meta
-			};
-		}
-	)
-);
-
 const getPopular = () => (
     createSelector(
         getEntities,
@@ -61,7 +43,6 @@ const getNowPlaying = () => (
 );
 
 export default {
-	getAll,
     getPopular,
     getNowPlaying
 };

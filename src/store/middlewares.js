@@ -2,9 +2,7 @@ import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'react-router-redux';
 import history from './history';
 
-const sagaMonitor = process.env.NODE_ENV !== 'production' ? console.tron.createSagaMonitor() : null;
-
-export const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+export const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [
 	routerMiddleware(history),

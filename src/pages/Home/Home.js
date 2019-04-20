@@ -9,6 +9,23 @@ import { Navigation } from 'swiper/dist/js/swiper.esm'
 
 class Home extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            activeTabLink: {
+            	id: 1,
+				title: 'Now playing',
+				slug: 'now_playing'
+			}
+        }
+    }
+
+    toggleTab = (item) => {
+    	this.setState({
+            activeTabLink: item
+		})
+	};
+
 	render(){
 
 		const params = {
@@ -20,14 +37,37 @@ class Home extends Component {
 				nextEl: '.swiper-button-next',
 				prevEl: '.swiper-button-prev'
 			},
-
 		};
+
+		const movieTabLinks = [
+			{
+				id: 1,
+				title: 'Now playing',
+				slug: 'now_playing'
+			},
+            {
+                id: 2,
+                title: 'Popular',
+				slug: 'popular'
+            },
+            {
+                id: 3,
+                title: 'Coming soon',
+				slug: 'upcoming'
+            },
+            {
+                id: 4,
+                title: 'Top rated',
+				slug: 'top_rated'
+            },
+		];
 
 		return (
 			<>
 				<div className="slider_v1 popular-slider">
 					<div className="container">
-                        <MovieContainer.Popular name="PopularMovies" data={{ category: 1 }} meta={{ page: 1, limit: 1 }}>
+
+						<MovieContainer.Popular name="PopularMovies" meta={{ page: 1 }}>
                             {({items, isFetched}) => (
                                 <Fragment>
 									{isFetched && (
@@ -64,8 +104,57 @@ class Home extends Component {
                                 </Fragment>
                             )}
                         </MovieContainer.Popular>
-					</div>
 
+					</div>
+                </div>
+
+                <div className="movies-list">
+                    <div className="container">
+                        <div className="title-hd">
+                            <h2>movies</h2>
+                            <a href="#" className="view-all">View all</a>
+                        </div>
+                        <ul className="tab-links">
+							{movieTabLinks.map(item => (
+                                <li
+									className={`${this.state.activeTabLink.id === item.id ? 'active' : ''}`}
+									onClick={() => this.toggleTab(item)}
+								>
+									<span>#{item.title}</span>
+								</li>
+							))}
+                        </ul>
+
+						<MovieContainer.NowPlaying name="NowPlaying" meta={{ page: 1 }} options={{slug: this.state.activeTabLink.slug}}>
+							{({items, isFetched}) => (
+								<Fragment>
+									{isFetched ? (
+										<div className="row-wrapper col-6">
+											{items.slice(0,18).map(movie => (
+												<div key={movie.id} className="col-item movie-card mb-30">
+													<img src={`${config.API_IMAGE.medium}/${movie.poster_path}`} alt=""/>
+													<div className="movie-content">
+														<div className="movie-title">{movie.original_title}</div>
+														<div className="vote-average">{movie.vote_average}</div>
+													</div>
+													<div className="read-more"><span>watch</span></div>
+												</div>
+											))}
+										</div>
+									) : (
+										<div className="row-wrapper col-6">
+											{[...Array(18)].map((item, i) => (
+												<div key={i} className="col-item movie-card default-movie-card mb-30">
+													<div className="default-mask"/>
+												</div>
+											))}
+										</div>
+									)}
+								</Fragment>
+							)}
+						</MovieContainer.NowPlaying>
+
+					</div>
                 </div>
 			</>
 		);
