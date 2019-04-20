@@ -3,6 +3,7 @@ import Actions from "store/actions";
 
 
 const initialState = {
+	movie: {}
 };
 
 

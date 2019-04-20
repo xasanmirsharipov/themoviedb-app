@@ -7,7 +7,7 @@ const initialState = {
 		ids: [],
 		isFetched: false,
 		meta: {}
-	}
+	},
 };
 
 export default (state = initialState, action) => {
@@ -48,6 +48,7 @@ export default (state = initialState, action) => {
 				}
 			};
 		}
+
 		default:
 			return state;
 	}

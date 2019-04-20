@@ -137,7 +137,7 @@ class Home extends Component {
 														<div className="movie-title">{movie.original_title}</div>
 														<div className="vote-average">{movie.vote_average}</div>
 													</div>
-													<Link to={`/movie/${movie.original_title}`} className="read-more"><span>watch</span></Link>
+													<Link to={`/movie/${movie.id}`} className="read-more"><span>watch</span></Link>
 												</div>
 											))}
 										</div>

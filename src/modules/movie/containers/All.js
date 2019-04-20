@@ -6,7 +6,7 @@ import isEqual from "lodash/isEqual";
 import Actions from "store/actions";
 import Selectors from "store/selectors";
 
-class Popular extends Component {
+class All extends Component {
 
     componentDidMount(){
         const { name, url, options, meta } = this.props;
@@ -61,4 +61,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
     dispatch
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Popular);
+export default connect(mapStateToProps, mapDispatchToProps)(All);

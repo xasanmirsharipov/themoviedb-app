@@ -24,6 +24,22 @@ const getAll = () => (
     )
 );
 
+const getOne = () => (
+    createSelector(
+        getEntities,
+        (state, props) => props.id,
+        (entities, id) => {
+
+            const normalized = denormalize({ movie: id }, { movie: Schemas.movie }, entities);
+
+            return {
+                item: get(normalized, 'movie', {}),
+            };
+        }
+    )
+);
+
 export default {
     getAll,
+    getOne
 };

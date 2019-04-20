@@ -37,9 +37,41 @@ export function* LoadAll(action){
     }
 }
 
+export function* LoadOne(action){
+
+    const { url, options, name, meta, cb } = action.payload;
+
+    try {
+
+        const { data } = yield call(api.request.get, api.queryBuilder(url));
+
+        const normalized = normalize(data, Schemas.movie);
+
+        yield put(Actions.entities.Load.success(normalized.entities));
+
+        yield put(Actions.movie.LoadOne.success({
+            name,
+            ids: normalized.result,
+        }));
+
+        yield call(cb.success);
+
+    } catch(error){
+
+        yield put(Actions.movie.LoadOne.failure({
+            name,
+            error
+        }));
+
+        yield call(cb.error);
+
+    }
+}
+
 
 export default function* root() {
 	yield all([
 		takeEvery(Actions.movie.LoadAll.REQUEST, LoadAll),
+		takeEvery(Actions.movie.LoadOne.REQUEST, LoadOne),
 	]);
 }

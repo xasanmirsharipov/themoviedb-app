@@ -16,7 +16,7 @@ const MovieSingle = lazy(() => import("./pages/MovieSingle"));
 
 const routes = [
 	{ path: '/', exact: true, component: Home },
-	{ path: '/movie/:slug', exact: true, component: MovieSingle },
+	{ path: '/movie/:id', exact: true, component: MovieSingle },
 ];
 
 export default ({ store }) => (
