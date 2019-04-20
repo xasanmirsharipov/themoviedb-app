@@ -1,22 +1,24 @@
 image: node:alpine
 
+variables:
+  PUBLIC_URL: /blockbuster-react
 cache:
-  key: node_modules
   paths:
-  - node_modules/
+    - node_modules
+
+stages:
+  - deploy
 
 pages:
   stage: deploy
   script:
-  - npm install
-  - npm run build
-  - mkdir .public
-  - cp -r dist/* .public
-  - mv .public public
+    - npm install
+    - npm run build
+    - cp public/index.html public/404.html
+    - mv public _public
+    - mv build public
   artifacts:
     paths:
-    - public
+      - public
   only:
-  - master
-  environment:
-    name: Pages
+    - master
