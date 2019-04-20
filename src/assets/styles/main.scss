@@ -63,7 +63,9 @@ a, button, input, select {outline: none;}
 .slider_v1{
   .slider-item{
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    padding-left: 70px;
+    padding-right: 70px;
     .movie-info{
       width: calc(100% - 300px);
       .title-wrapper{
@@ -96,11 +98,13 @@ a, button, input, select {outline: none;}
 .movie-statistics{
   color: #abb7c4;
   padding-left: 0;
+  display: flex;
   li{
     font-size: 15px;
     margin: 5px 0;
     list-style: none;
     font-weight: 600;
+    padding-right: 30px;
     span{
       margin-right: 10px;
       font-weight: 300;
