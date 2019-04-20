@@ -11,7 +11,7 @@ pages:
   - npm install
   - npm run build
   - mkdir .public
-  - cp -r dist/* .public
+  - cp -r public/* .public
   - mv .public public
   artifacts:
     paths:
