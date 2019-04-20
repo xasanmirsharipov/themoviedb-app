@@ -16,7 +16,7 @@ class Home extends Component {
 				<div className="slider_v1 popular-slider">
 
 					<div className="container">
-                        <MovieContainer.Popular name="PopularMovies" data={{ category: 1 }} meta={{ page: 1, limit: 1 }}>
+                        <MovieContainer.Popular name="PopularMovies" data={{ category: 1 }} meta={{ page: 1 }}>
                             {({items}) => (
                                 <Fragment>
                                     {items.slice(0, 1).map(item => (
@@ -47,6 +47,8 @@ class Home extends Component {
                                 </Fragment>
                             )}
                         </MovieContainer.Popular>
+
+
 					</div>
 
                 </div>

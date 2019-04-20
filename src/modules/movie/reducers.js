@@ -12,6 +12,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type){
+		case Actions.LoadNowPlaying.REQUEST:
+		case Actions.LoadPopular.REQUEST:
 		case Actions.LoadAll.REQUEST:{
 			const { name } = action.payload;
 			return {
@@ -22,6 +24,8 @@ export default (state = initialState, action) => {
 				}
 			};
 		}
+        case Actions.LoadNowPlaying.SUCCESS:
+        case Actions.LoadPopular.SUCCESS:
 		case Actions.LoadAll.SUCCESS:{
 			const { name, ids, meta } = action.payload;
 			return {
@@ -37,6 +41,8 @@ export default (state = initialState, action) => {
 				}
 			};
 		}
+        case Actions.LoadNowPlaying.FAILURE:
+        case Actions.LoadPopular.FAILURE:
 		case Actions.LoadAll.FAILURE:{
 			const { name, error } = action.payload;
 			return {

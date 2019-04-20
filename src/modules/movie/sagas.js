@@ -49,7 +49,39 @@ export function* LoadPopular(action){
 
         yield put(Actions.entities.Load.success(normalized.entities));
 
-        yield put(Actions.movie.LoadAll.success({
+        yield put(Actions.movie.LoadPopular.success({
+            name,
+            ids: normalized.result,
+            meta: {page: data.page, total_pages: data.total_pages, total_results: data.total_results}
+        }));
+
+        yield call(cb.success);
+
+    } catch(error){
+
+        yield put(Actions.movie.LoadPopular.failure({
+            name,
+            error
+        }));
+
+        yield call(cb.error);
+
+    }
+}
+
+export function* LoadNowPlaying(action){
+
+    const { name, meta, cb } = action.payload;
+
+    try {
+
+        const { data } = yield call(api.getNowPlaying, data, meta);
+
+        const normalized = normalize(data.results, [ Schemas.movie ]);
+
+        yield put(Actions.entities.Load.success(normalized.entities));
+
+        yield put(Actions.movie.LoadNowPlaying.success({
             name,
             ids: normalized.result,
             meta: {page: data.page, total_pages: data.total_pages, total_results: data.total_results}
@@ -73,5 +105,6 @@ export default function* root() {
 	yield all([
 		takeEvery(Actions.movie.LoadAll.REQUEST, LoadAll),
 		takeLatest(Actions.movie.LoadPopular.REQUEST, LoadPopular),
+		takeLatest(Actions.movie.LoadNowPlaying.REQUEST, LoadNowPlaying),
 	]);
 }
