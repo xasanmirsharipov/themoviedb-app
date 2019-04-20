@@ -38,8 +38,8 @@
     "yup": "^0.26.10"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development react-scripts start",
-    "build": "cross-env NODE_ENV=production react-scripts build",
+    "start": "cross-env NODE_ENV=development CI=false react-scripts start",
+    "build": "cross-env NODE_ENV=production CI=false react-scripts build",
     "test": "react-scripts test --env=jsdom"
   },
   "eslintConfig": {
