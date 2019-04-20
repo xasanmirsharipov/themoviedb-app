@@ -4,6 +4,7 @@
   "private": true,
   "description": "React Starter",
   "author": "Maqsud Karimov <@maqsudkarimov> (https://github.com/maqsudkarimov)",
+  "homepage": "https://xasandeveloper.gitlab.io/blockbuster-react",
   "dependencies": {
     "@sentry/browser": "^4.6.5",
     "axios": "^0.18.0",
