@@ -4,6 +4,9 @@ import { ConnectedRouter } from "react-router-redux";
 import { history } from 'store';
 import PropTypes from 'prop-types';
 
+import Layout from "components/Layout";
+import ScrollTop from "components/ScrollTop";
+
 import App from "./App";
 
 Route.propTypes.component = PropTypes.oneOfType([
@@ -22,18 +25,20 @@ const routes = [
 export default ({ store }) => (
 	<ConnectedRouter history={history} store={store}>
 		<App>
-			<Suspense fallback="">
-				<Switch>
-					{routes.map((route, key) => (
-						<Route
-							key={key}
-							path={route.path}
-							component={route.component}
-							exact={route.exact}
-						/>
-					))}
-				</Switch>
-			</Suspense>
+            <Layout>
+				<Suspense fallback="">
+					<Switch>
+						{routes.map((route, key) => (
+							<Route
+								key={key}
+								path={route.path}
+								component={ScrollTop(route.component)}
+								exact={route.exact}
+							/>
+						))}
+					</Switch>
+				</Suspense>
+            </Layout>
 		</App>
 	</ConnectedRouter>
 );

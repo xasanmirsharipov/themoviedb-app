@@ -1,7 +1,7 @@
-import One from './One';
 import All from './All';
+import One from './One';
 
 export default {
-	One,
-	All
+	All,
+	One
 }
