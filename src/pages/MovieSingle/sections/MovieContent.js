@@ -4,7 +4,7 @@ import config from "config";
 import Credits from "./Credits";
 import EntityContainer from "modules/entity/containers";
 
-import get from "lodash";
+import get from "lodash/get";
 import {withRouter} from "react-router";
 
 

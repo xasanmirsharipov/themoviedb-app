@@ -16,7 +16,7 @@ class MovieCard extends Component {
                     <div className="movie-title">{item.original_title}</div>
                     <div className="vote-average">{item.vote_average}</div>
                 </div>
-                <Link to={`/movie/${item.id}`} className="read-more"><span>watch</span></Link>
+                <Link to={`/movie/${item.id}`} className="read-more"><span>View</span></Link>
             </div>
         );
     }
