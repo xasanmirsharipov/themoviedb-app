@@ -20,7 +20,7 @@ class All extends Component {
         }
     }
 
-    Load = (name, url, options, { page = 1, limit = 3, sort = "-id", fields = [], include = [], filter = [] } = {}) => {
+    Load = (name, url, options, { page = 1, limit = 20, sort = "-id", fields = [], include = [], filter = [] } = {}) => {
         const { LoadAll } = this.props;
         LoadAll({
             name,
@@ -34,11 +34,17 @@ class All extends Component {
         });
     };
 
+    LoadMore = (page) => {
+        const { name, url, options } = this.props;
+        this.Load(name, url, options, {page: page} );
+    };
+
+
     render(){
 
         const { items, isFetched, meta, children } = this.props;
 
-        return children({ items, meta, isFetched });
+        return children({ items, meta, isFetched}, this.LoadMore);
     }
 }
 

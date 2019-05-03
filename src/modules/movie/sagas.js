@@ -11,7 +11,7 @@ export function* LoadAll(action){
 
     try {
 
-        const { data } = yield call(api.request.get, api.queryBuilder(url));
+        const { data } = yield call(api.request.get, api.queryBuilder(url, meta));
 
         const normalized = normalize(data.results, [ Schemas.movie ]);
 
