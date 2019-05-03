@@ -660,6 +660,18 @@ $sides: (top, bottom, left, right); // Leave this variable alone
       border-radius: 4px;
       overflow: hidden;
       display: block;
+      .no-photo{
+        background-color: #021f3c;
+        width: 100%;
+        height: 100%;
+        .img{
+          background: url("../images/icons/film-editing.svg") no-repeat center;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-size: 60px;
+        }
+      }
       img{
         display: block;
         position: absolute;
@@ -676,6 +688,7 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     }
     .movie-details{
       margin-left: 30px;
+      flex: 1;
       .movie-title{
         color: #fff;
         font-size: 32px;
@@ -807,6 +820,15 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   }
 }
 .movie-recommendations{
+  .title{
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+}
+.movies-list-wrapper{
+  padding: 50px 0;
   .title{
     font-size: 30px;
     color: #fff;

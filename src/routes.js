@@ -16,10 +16,12 @@ Route.propTypes.component = PropTypes.oneOfType([
 
 const Home = lazy(() => import("./pages/Home"));
 const MovieSingle = lazy(() => import("./pages/MovieSingle"));
+const MoviesList = lazy(() => import("./pages/MoviesList"));
 
 const routes = [
 	{ path: '/', exact: true, component: Home },
 	{ path: '/movie/:id', exact: true, component: MovieSingle },
+	{ path: '/movies/:slug', exact: true, component: MoviesList },
 ];
 
 export default ({ store }) => (

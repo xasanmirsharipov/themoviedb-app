@@ -39,30 +39,39 @@ class Credits extends Component {
                 {({item, isFetched}) => {
                     return(
                         <>
-                            {isFetched && (
-                                <div className="credits">
-                                    <div className="credits-title">Cast<span onClick={this._showAll}>Показать все</span></div>
-                                    <div className="credits-inline">
-                                        {item.cast.slice(0,showedItems).map(cast => (
-                                            <div className="credit-item">
-                                                {cast.profile_path ? (
-                                                    <div className="credit-img">
-                                                        <img src={`${config.API_IMAGE.original}/${cast.profile_path}`} alt=""/>
-                                                    </div>
-                                                ) : (
+                            <div className="credits">
+                                <div className="credits-title">Cast<span onClick={this._showAll}>Показать все</span></div>
+                                <div className="credits-inline">
+                                    {isFetched && item.cast.slice(0,showedItems).map((cast, i) => (
+                                        <div className="credit-item" key={i}>
+                                            {cast.profile_path ? (
+                                                <div className="credit-img">
+                                                    <img src={`${config.API_IMAGE.original}/${cast.profile_path}`} alt=""/>
+                                                </div>
+                                            ) : (
+                                                <div className="credit-img no-photo">
+                                                    <div className="img"/>
+                                                </div>
+                                            )}
+                                            <div className="credit-content">
+                                                <div className="credit-name">{cast.name}</div>
+                                                <div className="credit-character">{cast.character}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                    {!isFetched && (
+                                        <>
+                                            {[...Array(6)].map((item, i) => (
+                                                <div className="credit-item" key={i}>
                                                     <div className="credit-img no-photo">
                                                         <div className="img"/>
                                                     </div>
-                                                )}
-                                                <div className="credit-content">
-                                                    <div className="credit-name">{cast.name}</div>
-                                                    <div className="credit-character">{cast.character}</div>
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
+                                            ))}
+                                        </>
+                                    )}
                                 </div>
-                            )}
+                            </div>
                         </>
                     )
                 }}

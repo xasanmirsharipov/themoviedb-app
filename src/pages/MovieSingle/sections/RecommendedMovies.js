@@ -28,7 +28,7 @@ class RecommendedMovies extends Component {
                                         <Fragment>
                                             <div className="row-wrapper col-5">
                                                 {items.map(movie => (
-                                                    <MovieCard item={movie}/>
+                                                    <MovieCard item={movie} key={movie.id}/>
                                                 ))}
                                             </div>
                                         </Fragment>

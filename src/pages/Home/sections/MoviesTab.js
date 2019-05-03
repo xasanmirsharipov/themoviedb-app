@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 
 import EntityContainer from "modules/entity/containers";
 import MovieCard from "components/MovieCard";
+import {Link} from "react-router-dom";
 
 
 class MoviesTab extends Component {
@@ -90,6 +91,11 @@ class MoviesTab extends Component {
                                                     <div className="default-mask"/>
                                                 </div>
                                             ))}
+                                        </div>
+                                    )}
+                                    {isFetched && (
+                                        <div className="flex--cen">
+                                            <Link className="main-btn" to={`/movies/${this.state.activeTabLink.slug}`}>View all</Link>
                                         </div>
                                     )}
                                 </Fragment>

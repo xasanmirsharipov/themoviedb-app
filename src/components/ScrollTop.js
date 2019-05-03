@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from "query-string";
 
 const ScrollTop = (Component) => {
 
@@ -10,8 +11,13 @@ const ScrollTop = (Component) => {
         }
 
         componentDidUpdate() {
+            const { location } = this.props;
+            const query = qs.parse(location.search);
+
+            if(!query.page){
+                window.scrollTo(0, 0);
+            }
             // document.querySelector('.wrapper').scrollTop = 0;
-            window.scrollTo(0, 0);
         }
 
         render() {
