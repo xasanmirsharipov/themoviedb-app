@@ -1,42 +1,17 @@
-# React Project Starter
+# TheMovieDB App
+A ReactJS project.
 
-### Main
-- [x] Folder Structure
-- [x] Gitlab CI
-- [x] Create React App
-- [x] HotReload
-- [ ] Typescript
-- [x] Router
-- [x] Multilang
-- [ ] Form
-- [ ] Auth
-- [x] Reactotron
-- [x] Sentry error tracker
-- [x] Duck structure (modules)
+![](https://github.com/xasanmirsharipov/themoviedb-app/blob/master/docs/demo.png)
+## Demo
+[Weather ReactJS App](https://xasanmirsharipov.github.io/themoviedb-app/)
+## Build Setup
+``` bash
+# install dependencies
+npm install
 
+# serve with hot reload at localhost:3000
+npm start
 
-### Services
-- [x] Api
-- [ ] Storage
-- [ ] Time
-
-
-### Redux
-- [x] Saga
-- [x] Reselect
-- [x] Normalizr
-
-- [x] Actions 
-- [x] Reducers 
-- [x] Sagas 
-- [x] Schemas 
-- [x] Selectors 
-
-
-### Components
-- [ ] Buttons
-- [ ] Form elements
-- [ ] Tab
-- [ ] Table
-- [ ] Panel
-- [ ] Breadcrumb
+# build for production with minification
+npm run build
+```
