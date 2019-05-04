@@ -3,7 +3,7 @@ A ReactJS project.
 
 ![](https://github.com/xasanmirsharipov/themoviedb-app/blob/master/docs/demo.png)
 ## Demo
-[Weather ReactJS App](https://xasanmirsharipov.github.io/themoviedb-app/)
+[MovieDb ReactJS App](https://xasanmirsharipov.github.io/themoviedb-app/)
 ## Build Setup
 ``` bash
 # install dependencies
