@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development CI=false react-scripts start",
-    "build": "cross-env NODE_ENV=production CI=false react-scripts build",
+    "build": "cross-env NODE_ENV=production PUBLIC_URL=/themoviedb-app CI=false react-scripts build",
     "test": "react-scripts test --env=jsdom"
   },
   "eslintConfig": {
